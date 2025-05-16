@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Review Card - Exclusive Membership Program (Light Version)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles - Light Theme */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F9FAFB; /* Very Light Gray - Main Background */
+            color: #1F2937; /* Dark Slate Gray - Main Text Color */
+            overflow-x: hidden;
+        }
+
+        /* Header Styling */
+        #mainHeader {
+            background-color: rgba(255, 255, 255, 0.9); /* White with slight transparency */
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        #mainHeader.header-scrolled {
+            background-color: rgba(255, 255, 255, 0.98); /* More opaque on scroll */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        #mainHeader .text-white { /* Logo text */
+            color: #1F2937;
+        }
+        #mainHeader .text-orange-500 { /* Logo accent */
+            color: #FF5722;
+        }
+        .nav-link {
+            color: #4B5563; /* Medium Gray for nav links */
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #FF5722; /* Orange text on hover */
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #FF5722; /* Orange underline */
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        #mobileMenuButton {
+            color: #1F2937; /* Dark color for hamburger icon */
+        }
+        #mobileMenu {
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
+            border-top: 1px solid #E5E7EB;
+        }
+        #mobileMenu a {
+            color: #374151; /* Darker gray for mobile menu links */
+        }
+         #mobileMenu a:hover {
+            color: #FF5722;
+            background-color: #F3F4F6;
+        }
+        #mobileMenu a.text-orange-500 { /* Mobile "Apply Now" */
+           color: #FF5722;
+        }
+
+        /* Hero Section */
+        .hero-glow {
+            /* Initial glow is now part of an animation */
+            animation: pulse-glow 2.5s infinite ease-in-out;
+        }
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 30px 5px rgba(255, 87, 34, 0.25); }
+            50% { box-shadow: 0 0 65px 12px rgba(255, 87, 34, 0.45); } /* Enhanced glow */
+            100% { box-shadow: 0 0 30px 5px rgba(255, 87, 34, 0.25); }
+        }
+        .hero-section-bg { /* Custom class for hero background if needed, e.g. pure white */
+            background-color: #FFFFFF;
+        }
+        .hero-section-bg h2, .hero-section-bg p {
+            color: #1F2937; /* Ensure text is dark on light hero */
+        }
+        .hero-section-bg .text-gray-300, .hero-section-bg .text-gray-400 {
+            color: #4B5563; /* Darker gray for p tags */
+        }
+
+        /* Enhanced Animations */
+        .animate-on-scroll-fade-in-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .animate-on-scroll-fade-in-up.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-on-scroll-fade-in-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .animate-on-scroll-fade-in-left.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-on-scroll-fade-in-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .animate-on-scroll-fade-in-right.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animate-on-scroll-scale-up {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .animate-on-scroll-scale-up.animated {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        /* Fallback for original animate-on-scroll if any element still uses it */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* Buttons */
+        .cta-button {
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 0.5rem; /* 8px */
+        }
+        .cta-button:hover {
+            transform: translateY(-4px) scale(1.05); /* Slightly increased hover effect */
+        }
+        .cta-button-orange {
+            background-color: #FF5722; /* Vibrant Orange */
+            color: white;
+            font-weight: 600; /* semibold */
+        }
+        .cta-button-orange:hover {
+            background-color: #F4511E; /* Darker Orange */
+            box-shadow: 0 10px 20px rgba(255, 87, 34, 0.3); /* Enhanced hover shadow */
+        }
+        .cta-button-blue { /* For secondary actions if needed */
+            background-color: #3B82F6;
+            color: white;
+            font-weight: 600;
+        }
+        .cta-button-blue:hover {
+            background-color: #2563EB;
+            box-shadow: 0 8px 15px rgba(59, 130, 246, 0.25);
+        }
+
+        /* Section Title Underline */
+        .section-title-underline {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        .section-title-underline::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 70px;
+            height: 4px;
+            background-color: #FF5722; /* Orange underline */
+            border-radius: 2px;
+        }
+
+        /* Particle Background */
+        .particle-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        /* Card Styling - Adapted for Light Theme */
+        .content-card { /* General card style for light theme */
+            background-color: #FFFFFF;
+            border-radius: 1rem; /* 16px */
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.07), 0 4px 6px -2px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .content-card:hover {
+            transform: translateY(-10px) scale(1.03); /* Enhanced hover */
+            box-shadow: 0 20px 30px -5px rgba(0,0,0,0.12), 0 10px 15px -5px rgba(0,0,0,0.06); /* Enhanced shadow */
+        }
+        .content-card h4 { color: #111827; }
+        .content-card p { color: #4B5563; }
+        /* Icon animation within content-card */
+        .content-card .p-4.bg-orange-100.rounded-full svg {
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .content-card:hover .p-4.bg-orange-100.rounded-full svg {
+            transform: scale(1.15) rotate(-5deg);
+        }
+
+
+        /* Styling for Benefit Cards in Section #benefits */
+        .benefit-item-card {
+            background-color: #FFFFFF;
+            border-radius: 1rem; /* 16px */
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.08), 0 4px 8px -2px rgba(0,0,0,0.04);
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-top-color 0.35s ease;
+            border-top: 4px solid #FFDDC9; /* Lighter Peach/Orange for top border */
+            padding: 2rem 1.5rem; /* Generous padding */
+            text-align: center; /* Center content within the card */
+            display: flex; /* For flex column layout */
+            flex-direction: column; /* Stack icon and text vertically */
+            align-items: center; /* Center items horizontally */
+            height: 100%; /* Make cards in a row equal height if needed by grid */
+        }
+        .benefit-item-card:hover {
+            transform: translateY(-12px) scale(1.04); /* Slightly more pronounced hover */
+            box-shadow: 0 18px 35px -5px rgba(255, 87, 34, 0.15), 0 10px 18px -5px rgba(255, 87, 34, 0.1); /* Orange-tinted shadow */
+            border-top-color: #FF5722; /* Full orange border on hover */
+        }
+        .benefit-item-card .icon-container {
+            background-color: #FFF0E6; /* Very light, almost creamy orange for icon bg */
+            border-radius: 50%;
+            padding: 1rem; /* 16px padding around icon */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem; /* 20px space below icon */
+            flex-shrink: 0; /* Prevent icon container from shrinking */
+            transition: transform 0.3s ease;
+        }
+        .benefit-item-card:hover .icon-container { /* Optional: animate container too */
+             /* transform: scale(1.05); */
+        }
+        .benefit-item-card .icon-container svg {
+            color: #FF5722; /* Main orange for the icon */
+            width: 2.25rem; /* 36px icon size */
+            height: 2.25rem; /* 36px icon size */
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Added transition for smooth animation */
+        }
+        .benefit-item-card:hover .icon-container svg {
+            transform: scale(1.2) rotate(7deg); /* Icon animates on card hover */
+        }
+        .benefit-item-card h4 {
+            color: #1A202C; /* Darker, more prominent heading color */
+            font-size: 1.3rem; /* 20px, adjusted for better visual hierarchy */
+            font-weight: 700; /* Bold */
+            margin-bottom: 0.75rem; /* 12px */
+        }
+        .benefit-item-card p {
+            color: #4A5568; /* Slightly different gray for description */
+            font-size: 0.95rem; /* 15px, slightly larger for readability */
+            line-height: 1.65; /* Improved line spacing */
+            flex-grow: 1; /* Allow paragraph to take up space if card heights vary */
+        }
+
+        /* How to Apply Section Icon Hover */
+        .how-to-apply-icon-wrapper .p-5.bg-orange-100 { /* Target the icon container */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .how-to-apply-icon-wrapper:hover .p-5.bg-orange-100 {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 6px 12px rgba(255, 87, 34, 0.2);
+        }
+        .how-to-apply-icon-wrapper svg {
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .how-to-apply-icon-wrapper:hover svg {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        /* Pulse animation for specific icons */
+        .pulse-icon {
+            animation: pulse-subtle 2.2s infinite cubic-bezier(0.66, 0, 0, 1);
+        }
+        @keyframes pulse-subtle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.12); }
+        }
+
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #E5E7EB; /* Light Gray track */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FF8A65; /* Lighter Orange scrollbar thumb */
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF5722; /* Standard Orange on hover */
+        }
+
+        /* Input Fields - Light Theme */
+        .input-field {
+            background-color: #FFFFFF;
+            color: #1F2937;
+            border: 1px solid #D1D5DB; /* Light Gray border */
+            border-radius: 0.375rem; /* 6px */
+            padding: 0.75rem 1rem; /* 12px 16px */
+            font-size: 0.875rem; /* 14px */
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .input-field::placeholder {
+            color: #9CA3AF; /* Medium Gray placeholder */
+        }
+        .input-field:focus {
+            border-color: #FF5722;
+            box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.2);
+            outline: none;
+        }
+
+        /* General Text Color Adjustments */
+        .text-gray-300 { color: #4B5563 !important; } /* For paragraphs etc. */
+        .text-gray-400 { color: #6B7280 !important; } /* For subtitles, less important text */
+        .text-white { color: #111827 !important; } /* For main headings */
+
+        /* Section Specific Backgrounds */
+        .section-bg-white { background-color: #FFFFFF; }
+        .section-bg-offwhite { background-color: #F9FAFB; } /* Default body bg */
+        .section-bg-darker-light { background-color: #F3F4F6; } /* e.g. for footer or contrasting light section */
+
+        /* Footer Styling */
+        footer {
+            background-color: #FFFFFF; /* White footer background */
+            border-top: 1px solid #E5E7EB; /* Light gray border */
+        }
+        footer .text-gray-400 { color: #6B7280 !important; }
+        footer a:hover { color: #FF5722; }
+        footer .text-orange-500 { color: #FF5722; }
+        footer .text-white { color: #1F2937 !important; }
+
+    </style>
+</head>
+<body class="antialiased relative">
+
+    <canvas id="particleCanvas" class="particle-bg"></canvas>
+
+    <header id="mainHeader" class="py-5 fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="text-3xl font-bold text-white"> The<span class="text-orange-500">Review</span>Card
+            </a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="#program" class="nav-link px-3 py-2">Program Details</a>
+                <a href="#benefits" class="nav-link px-3 py-2">Benefits</a>
+                <a href="#how-to-apply" class="nav-link px-3 py-2">How to Apply</a>
+                <a href="#register" class="cta-button cta-button-orange font-semibold px-6 py-3 rounded-lg shadow-md">Apply Now</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="mobileMenuButton" class="focus:outline-none">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden">
+            <a href="#program" class="block px-6 py-3 transition-colors duration-300">Program Details</a>
+            <a href="#benefits" class="block px-6 py-3 transition-colors duration-300">Benefits</a>
+            <a href="#how-to-apply" class="block px-6 py-3 transition-colors duration-300">How to Apply</a>
+            <a href="#register" class="block text-orange-500 font-semibold px-6 py-4 transition-colors duration-300">Apply Now</a>
+        </div>
+    </header>
+
+    <section class="min-h-screen flex items-center justify-center pt-32 pb-20 relative overflow-hidden hero-section-bg">
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <p class="text-orange-400 font-semibold text-lg md:text-xl mb-3 animate-on-scroll-fade-in-up">EXCLUSIVE OPPORTUNITY</p>
+            <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight animate-on-scroll-scale-up text-white" style="transition-delay: 0.1s;"> We Can Include Only One <span id="hero-business-type" class="text-orange-500">[Business Type]</span><br>in <span id="hero-city-area">[Your City/Area]</span> for Our Program.
+            </h2>
+            <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto animate-on-scroll-fade-in-up" style="transition-delay: 0.2s;"> This is your chance to become the undisputed market leader. The Review Card program is designed for one exclusive partner per category, per area.
+            </p>
+            <div class="animate-on-scroll-fade-in-up" style="transition-delay: 0.3s;">
+                <a href="#register" class="cta-button cta-button-orange font-bold text-xl px-10 py-5 rounded-xl shadow-xl hero-glow">
+                    Claim Your Exclusive Spot
+                </a>
+            </div>
+            <p class="mt-8 text-sm text-gray-400 animate-on-scroll-fade-in-up" style="transition-delay: 0.4s;">Limited availability. Applications are reviewed meticulously.</p> </div>
+    </section>
+
+    <section id="program" class="py-20 section-bg-offwhite"> <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h3 class="text-4xl font-bold mb-4 section-title-underline animate-on-scroll-fade-in-up text-white">TRC Uses a Data-Driven Approach to Generate Proven, Reliable Results.</h3> <p class="text-lg text-gray-300 max-w-3xl mx-auto animate-on-scroll-fade-in-up" style="transition-delay: 0.1s;">
+                    The Review Card isn't just a tool; it's a comprehensive system that captures customer attention professionally and significantly increases review generation.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="content-card p-8 animate-on-scroll-fade-in-left flex flex-col items-center text-center">
+                    <div class="p-4 bg-orange-100 rounded-full mb-6 inline-block"> <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                    </div>
+                    <h4 class="text-2xl font-semibold mb-3">Guaranteed Market Exclusivity</h4>
+                    <p>
+                        As our sole partner for your business type in your area, you gain an unparalleled competitive advantage. We focus all our efforts on your success.
+                    </p>
+                </div>
+                <div class="content-card p-8 animate-on-scroll-fade-in-right flex flex-col items-center text-center" style="transition-delay: 0.1s;">
+                    <div class="p-4 bg-orange-100 rounded-full mb-6 inline-block">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                    </div>
+                    <h4 class="text-2xl font-semibold mb-3">Measurable Review Growth</h4>
+                    <p>
+                        Our system is engineered to maximize positive review collection, directly impacting your online reputation and customer acquisition.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 section-bg-white"> <div class="container mx-auto px-6 text-center">
+            <h3 class="text-4xl font-bold mb-12 section-title-underline animate-on-scroll-fade-in-up text-white">Make <span id="make-first-choice-business-name" class="text-orange-500">[Business Name]</span> The First Choice for <span id="make-first-choice-city-area">[City/Area]</span> Customers</h3>
+            <div class="grid md:grid-cols-3 gap-10 items-start">
+                <div class="animate-on-scroll-scale-up p-6 text-center">
+                    <div class="p-4 bg-orange-100 rounded-full mb-6 inline-block">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                    </div>
+                    <h4 class="text-2xl font-semibold mb-2 text-white">The Review Card System</h4>
+                    <p class="text-gray-300">Professionally designed cards make it easy and appealing for customers to share their positive experiences.</p>
+                </div>
+                <div class="animate-on-scroll-scale-up p-6 text-center" style="transition-delay: 0.1s;">
+                    <div class="p-4 bg-orange-100 rounded-full mb-6 inline-block">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    </div>
+                    <h4 class="text-2xl font-semibold mb-2 text-white">Increase Word-of-Mouth</h4>
+                    <p class="text-gray-300">Our process encourages a higher percentage of your satisfied customers to leave reviews, boosting your online presence.</p>
+                </div>
+                <div class="animate-on-scroll-scale-up p-6 text-center" style="transition-delay: 0.2s;">
+                    <div class="p-4 bg-orange-100 rounded-full mb-6 inline-block">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                    </div>
+                    <h4 class="text-2xl font-semibold mb-2 text-white">30-Day Money Back Guarantee</h4>
+                    <p class="text-gray-300">We're confident in our results. Try the program risk-free. No commitment, cancel anytime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="benefits" class="py-20 section-bg-offwhite">
+      <div class="container mx-auto px-6">
+        <div class="text-center mb-20">
+          <h3 class="text-4xl font-bold mb-4 section-title-underline animate-on-scroll-fade-in-up text-white">
+            Elevate Your Edge: Premium Perks for Members Only
+          </h3>
+          <p class="text-lg text-gray-300 max-w-3xl mx-auto animate-on-scroll-fade-in-up" style="transition-delay: 0.1s;">
+            Join the Review Card Program and tap into a robust collection of high-impact benefits crafted to enhance your visibility, influence, and client engagement.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+          <div class="benefit-item-card animate-on-scroll-scale-up" style="transition-delay: 0s;">
+            <div class="icon-container">
+              <svg  xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <path d="M12 11l-4 2.5M12 11l4 2.5M12 11V6M12 6L8.5 4.5M12 6l3.5-1.5M8.5 4.5L5 6M8.5 4.5l3.5 2.5M15.5 4.5L19 6m-3.5-1.5L12 5.5"></path>
+              </svg>
+            </div>
+            <h4>Dominant Local Recognition</h4>
+            <p>
+              Stand out as the exclusive, certified <strong class="text-orange-600">[Business Type]</strong> in <strong class="text-orange-600">[City/Area]</strong>, positioning yourself as the trusted local expert.
+            </p>
+          </div>
+
+          <div class="benefit-item-card animate-on-scroll-scale-up" style="transition-delay: 0.07s;">
+            <div class="icon-container">
+              <svg  xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500">
+                <path d="M12 1v22m-7-15h14M5 20h14M5 4h14M12 1L8 5M12 1l4 4M8 5H3v10h5zm8 0h5v10h-5z"></path>
+              </svg>
+            </div>
+            <h4>Insight-Rich Reporting</h4>
+            <p>
+              Access monthly reviews and data summaries that provide deep business intelligence to help fine-tune your strategy and elevate customer satisfaction.
+            </p>
+          </div>
+
+          <div class="benefit-item-card animate-on-scroll-scale-up" style="transition-delay: 0.14s;">
+            <div class="icon-container">
+              <svg  xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500">
+                <path d="M18.36 6.64a9 9 0 11-12.73 0M12 2v10M12 18h.01"></path>
+                <path d="M22 12c0 6-4.5 9-4.5 9s-4.5-3-4.5-9a4.5 4.5 0 019 0zM2 12C2 6 6.5 3 6.5 3S11 6 11 12a4.5 4.5 0 00-9 0z"></path>
+              </svg>
+            </div>
+            <h4>Enhanced Visibility & Reach</h4>
+            <p>
+              Gain a competitive edge through increased exposure across essential digital platforms—ensuring you’re the first choice for quality seekers.
+            </p>
+          </div>
+
+          <div class="benefit-item-card animate-on-scroll-scale-up" style="transition-delay: 0.21s;">
+            <div class="icon-container">
+              <svg  xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                <circle cx="12" cy="7" r="2"></circle>
+                <path d="M7 19.5v-5l5-2.5 5 2.5v5L12 22z"></path>
+              </svg>
+            </div>
+            <h4>Tailored "Spotlight" Promo Kit</h4>
+            <p>
+              Get an exclusive package of polished, co-branded print and digital assets to showcase your elite status and draw in premium clientele.
+            </p>
+          </div>
+
+          <div class="benefit-item-card animate-on-scroll-scale-up" style="transition-delay: 0.28s;">
+            <div class="icon-container">
+              <svg  xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 00-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 010 7.75"></path>
+                <path d="M19 10v2a3 3 0 01-3 3h-1"></path>
+              </svg>
+            </div>
+            <h4>Exclusive Support & Consults</h4>
+            <p>
+              Receive VIP access to personalized support and quarterly strategy meetings designed to unlock more value and sustained business growth.
+            </p>
+          </div>
+
+          <div class="benefit-item-card animate-on-scroll-scale-up" style="transition-delay: 0.35s;">
+            <div class="icon-container">
+              <svg  xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-500">
+                <path d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3zM7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3"></path>
+                <path d="M15 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"></path>
+              </svg>
+            </div>
+            <h4>Guaranteed Performance Outcomes</h4>
+            <p>
+              We back our program with a commitment to results. If you don’t see impact, we’ll work closely with you until success is achieved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-to-apply" class="py-20 section-bg-white"> <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h3 class="text-4xl font-bold mb-4 section-title-underline animate-on-scroll-fade-in-up">How to Apply for the <span id="apply-city-area">[City/Area]</span> <span id="apply-business-type">[Business Type]</span> Review Membership</h3>
+            </div>
+            <div class="max-w-4xl mx-auto grid md:grid-cols-3 gap-8 text-center">
+                <div class="animate-on-scroll-fade-in-up how-to-apply-icon-wrapper" style="transition-delay: 0s;">
+                    <div class="p-5 bg-orange-100 rounded-full inline-flex items-center justify-center mb-5">
+                        <svg class="w-10 h-10 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">1. Register Your Interest</h4>
+                    <p class="text-gray-600">Fill out the brief application form below. It takes less than 2 minutes.</p>
+                </div>
+                <div class="animate-on-scroll-fade-in-up how-to-apply-icon-wrapper" style="transition-delay: 0.1s;">
+                    <div class="p-5 bg-orange-100 rounded-full inline-flex items-center justify-center mb-5">
+                        <svg class="w-10 h-10 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">2. Brief Consultation</h4>
+                    <p class="text-gray-600">We'll reach out for a quick chat to ensure our program is a perfect fit for your business.</p>
+                </div>
+                <div class="animate-on-scroll-fade-in-up how-to-apply-icon-wrapper" style="transition-delay: 0.2s;">
+                    <div class="p-5 bg-orange-100 rounded-full inline-flex items-center justify-center mb-5">
+                        <svg class="w-10 h-10 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.539 1.118l-3.975-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.196-1.539-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">3. Become The Leader</h4>
+                    <p class="text-gray-600">If selected, you'll become our exclusive partner, ready to dominate your local market.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 section-bg-darker-light text-gray-800"> <div class="container mx-auto px-6 text-center">
+            <div class="animate-on-scroll-scale-up">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-orange-500 mx-auto mb-4 pulse-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h3 class="text-3xl md:text-4xl font-bold mb-3 animate-on-scroll-fade-in-up text-gray-900" style="transition-delay: 0.1s;">
+                This Spot is Available <span class="text-orange-500">Today Only</span>.
+            </h3>
+            <p class="text-lg text-gray-700 max-w-2xl mx-auto mb-8 animate-on-scroll-fade-in-up" style="transition-delay: 0.2s;">
+                Due to the exclusive nature of our program, the <span id="spot-business-type">[Business Type]</span> spot for <span id="spot-city-area">[City/Area]</span> is strictly limited. Once filled, it may not be available again. Don't miss this unique opportunity.
+            </p>
+            <div class="animate-on-scroll-fade-in-up" style="transition-delay: 0.3s;">
+                <a href="#register" class="cta-button cta-button-orange font-bold text-xl px-12 py-4 rounded-lg shadow-lg">
+                    Register Your Interest Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="register" class="py-20 section-bg-offwhite"> <div class="container mx-auto px-6">
+            <div class="max-w-2xl mx-auto text-center mb-12">
+                <h3 class="text-4xl font-bold mb-4 section-title-underline animate-on-scroll-fade-in-up">Register Your Interest</h3>
+                <p class="text-lg text-gray-600 animate-on-scroll-fade-in-up" style="transition-delay: 0.1s;">
+                    Submit your details to be considered for the exclusive Review Card program in <span id="register-city-area">[City/Area]</span>.
+                    Application is free, confidential, and takes only a few moments.
+                </p>
+            </div>
+            <form class="max-w-xl mx-auto animate-on-scroll-scale-up bg-white p-8 sm:p-10 rounded-xl shadow-xl" style="transition-delay: 0.2s;">
+                <div class="grid sm:grid-cols-2 gap-x-6 gap-y-5 mb-6">
+                    <div>
+                        <label for="your-name" class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                        <input type="text" id="your-name" name="your-name" placeholder="e.g., John Doe" class="w-full input-field">
+                    </div>
+                    <div>
+                        <label for="your-email" class="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
+                        <input type="email" id="your-email" name="your-email" placeholder="e.g., john.doe@example.com" class="w-full input-field">
+                    </div>
+                </div>
+                 <div class="mb-6">
+                    <label for="form-business-name" class="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
+                    <input type="text" name="business-name" placeholder="Your Business Name" id="form-business-name" class="w-full input-field">
+                 </div>
+                 <div class="mb-8">
+                    <label for="interest-reason" class="block text-sm font-medium text-gray-700 mb-1">Tell us briefly why you're interested (optional)</label>
+                    <textarea id="interest-reason" name="interest-reason" placeholder="e.g., Looking to boost our online reviews and stand out..." rows="4" class="w-full input-field"></textarea>
+                 </div>
+                <button type="submit" class="cta-button cta-button-orange font-bold text-lg w-full px-10 py-4 rounded-lg shadow-lg">
+                    Submit My Application
+                </button>
+                <p class="mt-5 text-xs text-gray-500 text-center">We respect your privacy. Your information is secure and will not be shared.</p>
+            </form>
+        </div>
+    </section>
+
+    <section class="py-16 section-bg-darker-light"> <div class="container mx-auto px-6 text-center">
+            <h4 class="text-3xl font-semibold text-gray-900 mb-4 animate-on-scroll-fade-in-up">Not Sure Yet?</h4> <p class="text-gray-700 mb-8 max-w-xl mx-auto animate-on-scroll-fade-in-up" style="transition-delay: 0.1s;"> Have questions or want to learn more before applying? We're happy to help.
+                Reach out to our program specialists for a no-obligation chat.
+            </p>
+            <div class="animate-on-scroll-fade-in-up" style="transition-delay: 0.2s;">
+                <a href="mailto:support@thereviewcard.com?subject=Inquiry%20about%20The%20Review%20Card%20Program" class="cta-button cta-button-blue font-semibold px-8 py-3 rounded-lg shadow-md">
+                    Contact Us For More Info
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="py-12 section-bg-white"> <div class="container mx-auto px-6 text-center text-gray-600"> <div class="mb-4">
+                <a href="#" class="text-2xl font-bold text-gray-800"> The<span class="text-orange-500">Review</span>Card
+                </a>
+            </div>
+            <p class="mb-3">&copy; <span id="footer-year"></span> The Review Card. All Rights Reserved. Exclusivity rules apply.</p>
+            <p class="text-sm space-x-4">
+                <a href="#" class="hover:text-orange-500 transition-colors">Privacy Policy</a>
+                <span>|</span>
+                <a href="#" class="hover:text-orange-500 transition-colors">Terms of Service</a>
+                <span>|</span>
+                <a href="mailto:support@thereviewcard.com" class="hover:text-orange-500 transition-colors">Contact Us</a>
+            </p>
+             <p class="text-xs mt-6">Engineered for market leaders by seasoned growth strategists.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Configuration ---
+        const businessType = "Pizza";
+        const cityArea = "Columbus";
+        const businessName = "Johnny's Pizza";
+
+        // --- Dynamic Content Population ---
+        function populateTextContent(id, content) {
+            const element = document.getElementById(id);
+            if (element) element.textContent = content;
+        }
+        
+        populateTextContent('hero-business-type', businessType);
+        populateTextContent('hero-city-area', cityArea);
+        populateTextContent('make-first-choice-business-name', businessName);
+        populateTextContent('make-first-choice-city-area', cityArea);
+        populateTextContent('apply-city-area', cityArea);
+        populateTextContent('apply-business-type', businessType);
+        populateTextContent('spot-business-type', businessType);
+        populateTextContent('spot-city-area', cityArea);
+        populateTextContent('register-city-area', cityArea);
+
+        const formBusinessNameInput = document.getElementById('form-business-name');
+        if (formBusinessNameInput) {
+            formBusinessNameInput.placeholder = `Your ${businessType} Name`;
+        }
+        
+        // Update strong tags in benefit cards (example for one, repeat for others if needed)
+        document.querySelectorAll('.benefit-item-card').forEach(card => {
+            const businessTypeStrong = card.querySelector('strong.text-orange-600:nth-of-type(1)');
+            const cityAreaStrong = card.querySelector('strong.text-orange-600:nth-of-type(2)');
+            if (businessTypeStrong) businessTypeStrong.textContent = businessType;
+            if (cityAreaStrong) cityAreaStrong.textContent = cityArea;
+        });
+
+
+        // --- Smooth Scrolling ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerOffset = document.getElementById('mainHeader').offsetHeight || 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+
+        // --- Scroll Animations ---
+        // Updated selector to catch all animation classes
+        const animatedElements = document.querySelectorAll('[class*="animate-on-scroll-"]');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, { threshold: 0.1 }); // Adjusted threshold slightly for earlier trigger
+        animatedElements.forEach(el => observer.observe(el));
+
+        // --- Footer Year ---
+        populateTextContent('footer-year', new Date().getFullYear());
+
+        // --- Particle Background Animation ---
+        const canvas = document.getElementById('particleCanvas');
+        let animationFrameId; 
+
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let particlesArray;
+
+            const setCanvasDimensions = () => {
+                canvas.width = window.innerWidth;
+                // Ensure canvas height covers the entire scrollable document height
+                canvas.height = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, document.body.offsetHeight, document.documentElement.offsetHeight, document.body.clientHeight, document.documentElement.clientHeight, window.innerHeight); 
+            };
+
+            class Particle {
+                constructor(x, y, directionX, directionY, size, color) {
+                    this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size; this.color = color;
+                }
+                draw() {
+                    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false); ctx.fillStyle = this.color; ctx.fill();
+                }
+                update() {
+                    if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                    if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+                    this.x += this.directionX; this.y += this.directionY; this.draw();
+                }
+            }
+
+            function initParticles() {
+                particlesArray = [];
+                // Adjusted particle density and cap for a slightly more noticeable effect
+                let numberOfParticles = (canvas.height * canvas.width) / 12000; 
+                if (numberOfParticles > 100) numberOfParticles = 100; 
+                for (let i = 0; i < numberOfParticles; i++) {
+                    let size = (Math.random() * 1.5) + 0.5; // Slightly larger and more varied size
+                    let x = Math.random() * canvas.width;
+                    let y = Math.random() * canvas.height;
+                    let directionX = (Math.random() * 0.3) - 0.15; // Slightly faster/more varied speed
+                    let directionY = (Math.random() * 0.3) - 0.15;
+                    let color = 'rgba(255, 87, 34, 0.15)'; // Slightly more visible particles
+
+                    particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+                }
+            }
+
+            function animateParticles() {
+                animationFrameId = requestAnimationFrame(animateParticles);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                }
+            }
+            
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            function setupParticles() {
+                if (prefersReducedMotion.matches) {
+                    if (canvas) canvas.style.display = 'none';
+                    if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                    return;
+                }
+                if (canvas) canvas.style.display = 'block';
+                setCanvasDimensions(); initParticles();
+                if (animationFrameId) cancelAnimationFrame(animationFrameId); 
+                animateParticles();
+            }
+
+            setupParticles(); 
+            prefersReducedMotion.addEventListener('change', setupParticles);
+
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    if (!prefersReducedMotion.matches) {
+                       setCanvasDimensions(); initParticles(); 
+                    }
+                }, 250);
+            });
+            // Also re-evaluate canvas size on content load / potential layout shifts
+            window.addEventListener('load', () => {
+                 if (!prefersReducedMotion.matches) {
+                    setTimeout(() => { // Timeout to allow layout to settle
+                        setCanvasDimensions(); 
+                        initParticles();
+                    }, 500);
+                 }
+            });
+        }
+
+        // --- Sticky Header Background Change on Scroll ---
+        const header = document.getElementById('mainHeader');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 30) { 
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+
+        // --- Mobile Menu Toggle ---
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>
